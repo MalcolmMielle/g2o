@@ -13,6 +13,7 @@ ENDIF(CHOLMOD_FOUND)
 # Examples which explicitly use CSparse
 IF(CSPARSE_FOUND)
   ADD_SUBDIRECTORY(tutorial_slam2d)
+  ADD_SUBDIRECTORY(tutorial_slam2d_real)
   ADD_SUBDIRECTORY(icp)
   ADD_SUBDIRECTORY(calibration_odom_laser)
   ADD_SUBDIRECTORY(simple_optimize)
