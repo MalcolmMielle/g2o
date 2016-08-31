@@ -133,7 +133,7 @@ void G2O_OPENGL_API drawPoint(float  pointSize);
 
 // @}
 
-#define POSE_VERTEX_COLOR 0.5f,0.5f,0.8f
+#define POSE_VERTEX_COLOR 0.8f,0.8f,0.8f
 #define POSE_PARAMETER_COLOR 0.5f,0.5f,0.8f
 #define POSE_EDGE_COLOR 0.4f,0.4f,0.7f
 #define POSE_EDGE_GHOST_COLOR 0.4f,0.4f,0.7f
@@ -142,6 +142,12 @@ void G2O_OPENGL_API drawPoint(float  pointSize);
 #define LANDMARK_EDGE_COLOR   0.7f,0.4f,0.2f
 #define LANDMARK_EDGE_GHOST_COLOR   0.7f,0.4f,0.2f
 
+#define POSE_VERTEX_PRIOR_COLOR 0.8f,0.8f,0.8f
+#define POSE_EDGE_PRIOR_COLOR 0.7f,0.7f,0.7f
+#define POSE_EDGE_PRIOR_GHOST_COLOR 0.7f,0.7f,0.7f
+
+#define POSE_EDGE_LINK_COLOR 0.7f,0.0f,0.0f
+#define POSE_EDGE_LINK_GHOST_COLOR 0.7f,0.0f,0.0f
 
 } // end namespace
 } // end namespace

@@ -33,16 +33,16 @@
 
 namespace g2o {
 
-  EdgeSE2Prior_malcolm::EdgeSE2Prior_malcolm() :
+  EdgeSE2Prior::EdgeSE2Prior() :
     EdgeSE2()
   {
   }
 
  
 #ifdef G2O_HAVE_OPENGL
-  EdgeSE2Prior_malcolmDrawAction::EdgeSE2Prior_malcolmDrawAction(): DrawAction(typeid(EdgeSE2Prior_malcolm).name()){}
+  EdgeSE2PriorDrawAction::EdgeSE2PriorDrawAction(): DrawAction(typeid(EdgeSE2Prior).name()){}
 
-  bool EdgeSE2Prior_malcolmDrawAction::refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_){
+  bool EdgeSE2PriorDrawAction::refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_){
     if (!DrawAction::refreshPropertyPtrs(params_))
       return false;
     if (_previousParams){
@@ -55,9 +55,9 @@ namespace g2o {
     return true;
   }
 
-  HyperGraphElementAction* EdgeSE2Prior_malcolmDrawAction::operator()(HyperGraph::HyperGraphElement* element, 
+  HyperGraphElementAction* EdgeSE2PriorDrawAction::operator()(HyperGraph::HyperGraphElement* element, 
                HyperGraphElementAction::Parameters* params_){
-// 	  std::cout << "DRAW up :D" << std::endl;exit(0);
+	  std::cout << "DRAW up :D" << std::endl;exit(0);
     if (typeid(*element).name()!=_typeName){
 		std::cout << "Wrong name :(" <<std::endl;;
       return 0;
@@ -110,7 +110,7 @@ namespace g2o {
     if (_show && !_show->value())
       return this;
 
-    EdgeSE2Prior_malcolm* e =  static_cast<EdgeSE2Prior_malcolm*>(element);
+    EdgeSE2Prior* e =  static_cast<EdgeSE2Prior*>(element);
     VertexSE2* from = static_cast<VertexSE2*>(e->vertex(0));
     VertexSE2* to   = static_cast<VertexSE2*>(e->vertex(1));
     if (! from && ! to)
@@ -120,7 +120,7 @@ namespace g2o {
     glPushAttrib(GL_ENABLE_BIT | GL_LIGHTING | GL_COLOR);
     glDisable(GL_LIGHTING);
     if (! from) {
-      glColor3f(POSE_EDGE_PRIOR_GHOST_COLOR);
+      glColor3f(POSE_EDGE_GHOST_COLOR);
       toTransform = to->estimate();
       fromTransform = to->estimate()*e->measurement().inverse();
       // DRAW THE FROM EDGE AS AN ARROW
@@ -130,7 +130,7 @@ namespace g2o {
       opengl::drawArrow2D((float)_triangleX->value(), (float)_triangleY->value(), (float)_triangleX->value()*.3f);
       glPopMatrix();
     } else if (! to){
-      glColor3f(POSE_EDGE_PRIOR_GHOST_COLOR);
+      glColor3f(POSE_EDGE_GHOST_COLOR);
       fromTransform = from->estimate();
       toTransform = from->estimate()*e->measurement();
       // DRAW THE TO EDGE AS AN ARROW
@@ -140,7 +140,7 @@ namespace g2o {
       opengl::drawArrow2D((float)_triangleX->value(), (float)_triangleY->value(), (float)_triangleX->value()*.3f);
       glPopMatrix();
     } else {
-      glColor3f(POSE_EDGE_PRIOR_COLOR);
+      glColor3f(POSE_EDGE_COLOR);
       fromTransform = from->estimate();
       toTransform = to->estimate();
     }

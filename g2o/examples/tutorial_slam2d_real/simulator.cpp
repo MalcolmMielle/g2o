@@ -264,6 +264,9 @@ namespace g2o {
             _landmarkObservations.push_back(LandmarkEdge());
             LandmarkEdge& le = _landmarkObservations.back();
 
+			std::cout << "True pose landmark !" << l->truePose << std::endl;
+			
+			
             le.from = p.id;
             le.to = l->id;
             le.trueMeas = trueObservation;

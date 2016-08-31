@@ -24,7 +24,7 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "edge_se2_prior.h"
+#include "edge_se2_link.h"
 
 #ifdef G2O_HAVE_OPENGL
 #include "g2o/stuff/opengl_wrapper.h"
@@ -33,16 +33,16 @@
 
 namespace g2o {
 
-  EdgeSE2Prior_malcolm::EdgeSE2Prior_malcolm() :
+  EdgeSE2Link_malcolm::EdgeSE2Link_malcolm() :
     EdgeSE2()
   {
   }
 
  
 #ifdef G2O_HAVE_OPENGL
-  EdgeSE2Prior_malcolmDrawAction::EdgeSE2Prior_malcolmDrawAction(): DrawAction(typeid(EdgeSE2Prior_malcolm).name()){}
+  EdgeSE2Link_malcolmDrawAction::EdgeSE2Link_malcolmDrawAction(): DrawAction(typeid(EdgeSE2Link_malcolm).name()){}
 
-  bool EdgeSE2Prior_malcolmDrawAction::refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_){
+  bool EdgeSE2Link_malcolmDrawAction::refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_){
     if (!DrawAction::refreshPropertyPtrs(params_))
       return false;
     if (_previousParams){
@@ -55,7 +55,7 @@ namespace g2o {
     return true;
   }
 
-  HyperGraphElementAction* EdgeSE2Prior_malcolmDrawAction::operator()(HyperGraph::HyperGraphElement* element, 
+  HyperGraphElementAction* EdgeSE2Link_malcolmDrawAction::operator()(HyperGraph::HyperGraphElement* element, 
                HyperGraphElementAction::Parameters* params_){
 // 	  std::cout << "DRAW up :D" << std::endl;exit(0);
     if (typeid(*element).name()!=_typeName){
@@ -110,7 +110,7 @@ namespace g2o {
     if (_show && !_show->value())
       return this;
 
-    EdgeSE2Prior_malcolm* e =  static_cast<EdgeSE2Prior_malcolm*>(element);
+    EdgeSE2Link_malcolm* e =  static_cast<EdgeSE2Link_malcolm*>(element);
     VertexSE2* from = static_cast<VertexSE2*>(e->vertex(0));
     VertexSE2* to   = static_cast<VertexSE2*>(e->vertex(1));
     if (! from && ! to)
@@ -120,7 +120,7 @@ namespace g2o {
     glPushAttrib(GL_ENABLE_BIT | GL_LIGHTING | GL_COLOR);
     glDisable(GL_LIGHTING);
     if (! from) {
-      glColor3f(POSE_EDGE_PRIOR_GHOST_COLOR);
+      glColor3f(POSE_EDGE_LINK_GHOST_COLOR);
       toTransform = to->estimate();
       fromTransform = to->estimate()*e->measurement().inverse();
       // DRAW THE FROM EDGE AS AN ARROW
@@ -130,7 +130,7 @@ namespace g2o {
       opengl::drawArrow2D((float)_triangleX->value(), (float)_triangleY->value(), (float)_triangleX->value()*.3f);
       glPopMatrix();
     } else if (! to){
-      glColor3f(POSE_EDGE_PRIOR_GHOST_COLOR);
+      glColor3f(POSE_EDGE_LINK_GHOST_COLOR);
       fromTransform = from->estimate();
       toTransform = from->estimate()*e->measurement();
       // DRAW THE TO EDGE AS AN ARROW
@@ -140,7 +140,7 @@ namespace g2o {
       opengl::drawArrow2D((float)_triangleX->value(), (float)_triangleY->value(), (float)_triangleX->value()*.3f);
       glPopMatrix();
     } else {
-      glColor3f(POSE_EDGE_PRIOR_COLOR);
+      glColor3f(POSE_EDGE_LINK_COLOR);
       fromTransform = from->estimate();
       toTransform = to->estimate();
     }

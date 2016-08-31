@@ -26,14 +26,24 @@
 
 #include <iostream>
 #include <cmath>
+// #include <EIG>
 
 #include "simulator.h"
 
+// Old version
 #include "vertex_se2.h"
 #include "vertex_point_xy.h"
 #include "edge_se2.h"
 #include "edge_se2_pointxy.h"
 #include "types_tutorial_slam2d.h"
+
+// #include "vertex_se2.h"
+// #include "vertex_point_xy.h"
+// #include "g2o/types/slam2d/edge_se2.h"
+// #include "g2o/types/slam2d/edge_se2_pointxy.h"
+// #include "g2o/types/slam2d/parameter_se2_offset.h"
+// #include "types_tutorial_slam2d.h"
+
 
 #include "g2o/core/sparse_optimizer.h"
 #include "g2o/core/block_solver.h"
@@ -53,6 +63,7 @@ int main()
   SE2 sensorOffsetTransf(0.2, 0.1, -0.1);
   int numNodes = 300;
   Simulator simulator;
+  //This line create the simulation of all landmarks
   simulator.simulate(numNodes, sensorOffsetTransf);
 
   /*********************************************************************************
@@ -141,6 +152,8 @@ int main()
   VertexSE2* firstRobotPose = dynamic_cast<VertexSE2*>(optimizer.vertex(0));
   firstRobotPose->setFixed(true);
   optimizer.setVerbose(true);
+  
+  optimizer.save("tutorial_before_fixed.g2o");
 
   cerr << "Optimizing" << endl;
   optimizer.initializeOptimization();

@@ -140,8 +140,11 @@ namespace g2o {
 
   HyperGraphElementAction* EdgeSE2DrawAction::operator()(HyperGraph::HyperGraphElement* element, 
                HyperGraphElementAction::Parameters* params_){
-    if (typeid(*element).name()!=_typeName)
+//     std::cout << "DRAW BASE" << std::endl;exit(0);
+    if (typeid(*element).name()!=_typeName){
+		std::cout << "Wrong name :(" <<std::endl;;
       return 0;
+	}
 
     refreshPropertyPtrs(params_);
     if (! _previousParams)

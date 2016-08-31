@@ -24,42 +24,46 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef G2O_EDGE_SE2_PRIOR_H
-#define G2O_EDGE_SE2_PRIOR_H
+#ifndef G2O_VERTEX_SE2_PRIOR_H
+#define G2O_VERTEX_SE2_PRIOR_H
 
+// #include "g2o/config.h"
+// #include "g2o/core/base_vertex.h"
+// #include "g2o/core/hyper_graph_action.h"
+// #include "se2.h"
+// #include "g2o_types_slam2d_api.h"
 #include "vertex_se2.h"
-#include "edge_se2.h"
-#include "g2o/core/base_unary_edge.h"
-#include "g2o_types_slam2d_api.h"
 
 namespace g2o {
 
   /**
-   * \brief Prior for a two D pose
+   * \brief 2D pose Vertex, (x,y,theta)
    */
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolm : public EdgeSE2
+  class G2O_TYPES_SLAM2D_API VertexSE2Prior : public VertexSE2
   {
     public:
-//       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
-      EdgeSE2Prior_malcolm();
+      EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+      VertexSE2Prior();
+	  
+// 	virtual bool read(std::istream& is);
+// 	virtual bool write(std::ostream& os) const;
 
   };
 
-  
-  #ifdef G2O_HAVE_OPENGL
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolmDrawAction: public DrawAction{
-  public:
-    EdgeSE2Prior_malcolmDrawAction();
-    virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
-            HyperGraphElementAction::Parameters* params_);
-  protected:
-    virtual bool refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_);
-    FloatProperty* _triangleX, *_triangleY;
-
-  };
-	#endif
+#ifdef G2O_HAVE_OPENGL
+//   class G2O_TYPES_SLAM2D_API VertexSE2PriorDrawAction: public DrawAction{
+//   public:
+//     VertexSE2PriorDrawAction();
+//     virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
+//             HyperGraphElementAction::Parameters* params_ );
+//   protected:
+//     HyperGraphElementAction* _drawActions;
+//     virtual bool refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_);
+//     FloatProperty* _triangleX, *_triangleY;
+// 
+//   };
+#endif
 
 } // end namespace
 
 #endif
-

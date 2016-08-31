@@ -38,12 +38,13 @@
 // #include "types_tutorial_slam2d.h"
 
 #include "g2o/types/slam2d/vertex_se2.h"
+#include "g2o/types/slam2d/vertex_se2_prior.h"
 #include "g2o/types/slam2d/vertex_point_xy.h"
 #include "g2o/types/slam2d/edge_se2.h"
+#include "g2o/types/slam2d/edge_se2_prior.h"
 #include "g2o/types/slam2d/edge_se2_pointxy.h"
 #include "g2o/types/slam2d/parameter_se2_offset.h"
 // #include "types_tutorial_slam2d.h"
-
 
 #include "g2o/core/sparse_optimizer.h"
 #include "g2o/core/block_solver.h"
@@ -58,10 +59,12 @@ using namespace g2o::tutorial;
 
 int main()
 {
+	
+// 	exit(0);
   // TODO simulate different sensor offset
   // simulate a robot observing landmarks while travelling on a grid
   SE2 sensorOffsetTransf(0.2, 0.1, -0.1);
-  int numNodes = 300;
+  int numNodes = 10;
   Simulator simulator;
   //This line create the simulation of all landmarks
   simulator.simulate(numNodes, sensorOffsetTransf);
@@ -92,6 +95,7 @@ int main()
   // first adding all the vertices
   cerr << "Optimization: Adding robot poses ... ";
   for (size_t i = 0; i < simulator.poses().size(); ++i) {
+	std::cout << "one more " << std::endl;
     const Simulator::GridPose& p = simulator.poses()[i];
     const SE2& t = p.simulatorPose; 
     VertexSE2* robot =  new VertexSE2;
@@ -106,7 +110,7 @@ int main()
   for (size_t i = 0; i < simulator.odometry().size(); ++i) {
     const Simulator::GridEdge& simEdge = simulator.odometry()[i];
 
-    EdgeSE2* odometry = new EdgeSE2;
+    EdgeSE2Prior_malcolm* odometry = new EdgeSE2Prior_malcolm;
     odometry->vertices()[0] = optimizer.vertex(simEdge.from);
     odometry->vertices()[1] = optimizer.vertex(simEdge.to);
     odometry->setMeasurement(simEdge.simulatorTransf);
@@ -115,29 +119,29 @@ int main()
   }
   cerr << "done." << endl;
 
-  // add the landmark observations
-  cerr << "Optimization: add landmark vertices ... ";
-  for (size_t i = 0; i < simulator.landmarks().size(); ++i) {
-    const Simulator::Landmark& l = simulator.landmarks()[i];
-    VertexPointXY* landmark = new VertexPointXY;
-    landmark->setId(l.id);
-    landmark->setEstimate(l.simulatedPose);
-    optimizer.addVertex(landmark);
-  }
-  cerr << "done." << endl;
-
-  cerr << "Optimization: add landmark observations ... ";
-  for (size_t i = 0; i < simulator.landmarkObservations().size(); ++i) {
-    const Simulator::LandmarkEdge& simEdge = simulator.landmarkObservations()[i];
-    EdgeSE2PointXY* landmarkObservation =  new EdgeSE2PointXY;
-    landmarkObservation->vertices()[0] = optimizer.vertex(simEdge.from);
-    landmarkObservation->vertices()[1] = optimizer.vertex(simEdge.to);
-    landmarkObservation->setMeasurement(simEdge.simulatorMeas);
-    landmarkObservation->setInformation(simEdge.information);
-    landmarkObservation->setParameterId(0, sensorOffset->id());
-    optimizer.addEdge(landmarkObservation);
-  }
-  cerr << "done." << endl;
+//   // add the landmark observations
+//   cerr << "Optimization: add landmark vertices ... ";
+//   for (size_t i = 0; i < simulator.landmarks().size(); ++i) {
+//     const Simulator::Landmark& l = simulator.landmarks()[i];
+//     VertexPointXY* landmark = new VertexPointXY;
+//     landmark->setId(l.id);
+//     landmark->setEstimate(l.simulatedPose);
+//     optimizer.addVertex(landmark);
+//   }
+//   cerr << "done." << endl;
+// 
+//   cerr << "Optimization: add landmark observations ... ";
+//   for (size_t i = 0; i < simulator.landmarkObservations().size(); ++i) {
+//     const Simulator::LandmarkEdge& simEdge = simulator.landmarkObservations()[i];
+//     EdgeSE2PointXY* landmarkObservation =  new EdgeSE2PointXY;
+//     landmarkObservation->vertices()[0] = optimizer.vertex(simEdge.from);
+//     landmarkObservation->vertices()[1] = optimizer.vertex(simEdge.to);
+//     landmarkObservation->setMeasurement(simEdge.simulatorMeas);
+//     landmarkObservation->setInformation(simEdge.information);
+//     landmarkObservation->setParameterId(0, sensorOffset->id());
+//     optimizer.addEdge(landmarkObservation);
+//   }
+//   cerr << "done." << endl;
 
 
   /*********************************************************************************
@@ -157,7 +161,7 @@ int main()
 
 //   cerr << "Optimizing" << endl;
 //   optimizer.initializeOptimization();
-//   optimizer.optimize(10);
+  optimizer.optimize(10);
 //   cerr << "done." << endl;
 // 
 //   optimizer.save("tutorial_after_real.g2o");

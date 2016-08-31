@@ -27,29 +27,29 @@
 #ifndef G2O_EDGE_SE2_PRIOR_H
 #define G2O_EDGE_SE2_PRIOR_H
 
-#include "vertex_se2.h"
-#include "edge_se2.h"
+#include "g2o/types/slam2d/vertex_se2.h"
+#include "g2o/types/slam2d/edge_se2.h"
 #include "g2o/core/base_unary_edge.h"
-#include "g2o_types_slam2d_api.h"
+#include "g2o/types/slam2d/g2o_types_slam2d_api.h"
 
 namespace g2o {
 
   /**
    * \brief Prior for a two D pose
    */
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolm : public EdgeSE2
+  class G2O_TYPES_SLAM2D_API EdgeSE2Prior : public EdgeSE2
   {
     public:
 //       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
-      EdgeSE2Prior_malcolm();
+      EdgeSE2Prior();
 
   };
 
   
   #ifdef G2O_HAVE_OPENGL
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolmDrawAction: public DrawAction{
+  class G2O_TYPES_SLAM2D_API EdgeSE2PriorDrawAction: public DrawAction{
   public:
-    EdgeSE2Prior_malcolmDrawAction();
+    EdgeSE2PriorDrawAction();
     virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
             HyperGraphElementAction::Parameters* params_);
   protected:

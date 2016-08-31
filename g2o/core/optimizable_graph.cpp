@@ -639,27 +639,41 @@ bool OptimizableGraph::load(const char* filename, bool createEdges)
 bool OptimizableGraph::save(const char* filename, int level) const
 {
   ofstream ofs(filename);
-  if (!ofs)
+  if (!ofs){
+	std::cout << "Can't save graph g2o" << std::endl;
     return false;
+  }
   return save(ofs, level);
 }
 
 bool OptimizableGraph::save(ostream& os, int level) const
 {
-  if (! _parameters.write(os))
-    return false;
+  if (! _parameters.write(os)){
+// 	std::cout << "Can't save graph g2o param" << std::endl;
+	return false;
+  }
   set<Vertex*, VertexIDCompare> verticesToSave;
   for (HyperGraph::EdgeSet::const_iterator it = edges().begin(); it != edges().end(); ++it) {
+	std::cout << "Vertex to save" << std::endl;
     OptimizableGraph::Edge* e = static_cast<OptimizableGraph::Edge*>(*it);
     if (e->level() == level) {
       for (vector<HyperGraph::Vertex*>::const_iterator it = e->vertices().begin(); it != e->vertices().end(); ++it) {
-	if (*it)
-	  verticesToSave.insert(static_cast<OptimizableGraph::Vertex*>(*it));
+		if (*it){
+			std::cout << "Adding the vertex" << std::endl;
+			verticesToSave.insert(static_cast<OptimizableGraph::Vertex*>(*it));
+		}
+		else{
+			std::cout << "What :(?" << std::endl;
+		}
       }
     }
+    else{
+		std::cout << "Level is bad in edge :O? " << e->level()<< std::endl;
+	}
   }
 
   for (set<Vertex*, VertexIDCompare>::const_iterator it = verticesToSave.begin(); it != verticesToSave.end(); ++it){
+	  std::cout << "Saving the vertex :D" << std::endl;
     OptimizableGraph::Vertex* v = *it;
     saveVertex(os, v);
   }
@@ -674,6 +688,7 @@ bool OptimizableGraph::save(ostream& os, int level) const
 
   for (EdgeContainer::const_iterator it = edgesToSave.begin(); it != edgesToSave.end(); ++it) {
     OptimizableGraph::Edge* e = *it;
+	std::cout << "Saving the edge :D" << std::endl;
     saveEdge(os, e);
   }
 
@@ -892,6 +907,7 @@ bool OptimizableGraph::saveVertex(std::ostream& os, OptimizableGraph::Vertex* v)
 {
   Factory* factory = Factory::instance();
   string tag = factory->tag(v);
+  std::cout << "tag : " << tag << std::endl;
   if (tag.size() > 0) {
     os << tag << " " << v->id() << " ";
     v->write(os);
@@ -921,6 +937,7 @@ bool OptimizableGraph::saveEdge(std::ostream& os, OptimizableGraph::Edge* e) con
 {
   Factory* factory = Factory::instance();
   string tag = factory->tag(e);
+  std::cout << "tag-edge : " << tag << std::endl;
   if (tag.size() > 0) {
     os << tag << " ";
     if (_edge_has_id)

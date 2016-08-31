@@ -24,8 +24,8 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef G2O_EDGE_SE2_PRIOR_H
-#define G2O_EDGE_SE2_PRIOR_H
+#ifndef G2O_EDGE_SE2_LINK_H
+#define G2O_EDGE_SE2_LINK_H
 
 #include "vertex_se2.h"
 #include "edge_se2.h"
@@ -37,19 +37,19 @@ namespace g2o {
   /**
    * \brief Prior for a two D pose
    */
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolm : public EdgeSE2
+  class G2O_TYPES_SLAM2D_API EdgeSE2Link_malcolm : public EdgeSE2
   {
     public:
 //       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
-      EdgeSE2Prior_malcolm();
+      EdgeSE2Link_malcolm();
 
   };
 
   
   #ifdef G2O_HAVE_OPENGL
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolmDrawAction: public DrawAction{
+  class G2O_TYPES_SLAM2D_API EdgeSE2Link_malcolmDrawAction: public DrawAction{
   public:
-    EdgeSE2Prior_malcolmDrawAction();
+    EdgeSE2Link_malcolmDrawAction();
     virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
             HyperGraphElementAction::Parameters* params_);
   protected:
