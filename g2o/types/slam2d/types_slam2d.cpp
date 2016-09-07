@@ -43,6 +43,7 @@ namespace g2o {
 //   G2O_REGISTER_TYPE(EDGE_PRIOR_SE2, EdgeSE2Prior);
   G2O_REGISTER_TYPE(EDGE_PRIOR_SE2_malcolm, EdgeSE2Prior_malcolm);
   G2O_REGISTER_TYPE(EDGE_LINK_SE2_malcolm, EdgeSE2Link_malcolm);
+  G2O_REGISTER_TYPE(EDGE_LANDMARK_SE2_malcolm, EdgeSE2Landmark_malcolm);
   G2O_REGISTER_TYPE(EDGE_PRIOR_SE2_XY, EdgeSE2XYPrior);
   G2O_REGISTER_TYPE(EDGE_SE2, EdgeSE2);
   G2O_REGISTER_TYPE(EDGE_SE2_XY, EdgeSE2PointXY);
@@ -68,6 +69,7 @@ namespace g2o {
   G2O_REGISTER_ACTION(EdgeSE2DrawAction);
   G2O_REGISTER_ACTION(EdgeSE2Prior_malcolmDrawAction);
   G2O_REGISTER_ACTION(EdgeSE2Link_malcolmDrawAction);
+  G2O_REGISTER_ACTION(EdgeSE2Landmark_malcolmDrawAction);
   G2O_REGISTER_ACTION(EdgeSE2PointXYDrawAction);
   G2O_REGISTER_ACTION(EdgeSE2PointXYBearingDrawAction);
 
