@@ -152,6 +152,9 @@ void G2O_OPENGL_API drawPoint(float  pointSize);
 #define POSE_EDGE_LINK_COLOR 0.7f,0.0f,0.0f
 #define POSE_EDGE_LINK_GHOST_COLOR 0.7f,0.0f,0.0f
 
+#define POSE_EDGE_LINK_XY_COLOR 0.7f,0.0f,0.0f
+#define POSE_EDGE_LINK_XY_GHOST_COLOR 0.7f,0.0f,0.0f
+
 } // end namespace
 } // end namespace
 

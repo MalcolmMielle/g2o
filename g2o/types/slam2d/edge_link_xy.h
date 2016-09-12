@@ -24,26 +24,50 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef G2O_TYPES_SLAM2D_
-#define G2O_TYPES_SLAM2D_
+#ifndef G2O_EDGE_LINK_XY_MALCOLM_H
+#define G2O_EDGE_LINK_XY_MALCOLM_H
 
-#include "g2o/config.h"
 #include "vertex_se2.h"
-#include "vertex_point_xy.h"
-#include "parameter_se2_offset.h"
-#include "edge_se2_prior.h"
-#include "edge_landmark_se2.h"
-#include "edge_se2_link.h"
-#include "edge_link_xy.h"
-#include "edge_se2_xyprior.h"
-#include "edge_se2.h"
 #include "edge_se2_pointxy.h"
-#include "edge_se2_pointxy_bearing.h"
-#include "edge_se2_pointxy_calib.h"
-#include "edge_se2_offset.h"
-#include "edge_se2_pointxy_offset.h"
-#include "edge_pointxy.h"
-#include "edge_se2_twopointsxy.h"
-#include "edge_se2_lotsofxy.h"
+#include "g2o/core/base_unary_edge.h"
+#include "g2o_types_slam2d_api.h"
+
+namespace g2o {
+
+  /**
+   * \brief Prior for a two D pose
+   */
+  class G2O_TYPES_SLAM2D_API EdgeLinkXY_malcolm : public EdgeSE2PointXY
+  {
+    public:
+//       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
+      EdgeLinkXY_malcolm();
+
+  };
+
+  
+  #ifdef G2O_HAVE_OPENGL
+  class G2O_TYPES_SLAM2D_API EdgeLinkXY_malcolmDrawAction: public DrawAction{
+  public:
+    EdgeLinkXY_malcolmDrawAction();
+    virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
+            HyperGraphElementAction::Parameters* params_);
+
+
+  };
+	#endif
+  
+  
+//   #ifdef G2O_HAVE_OPENGL
+//   class G2O_TYPES_SLAM2D_API EdgeSE2PointXYDrawAction: public DrawAction{
+//   public:
+//     EdgeSE2PointXYDrawAction();
+//     virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
+//             HyperGraphElementAction::Parameters* params_);
+//   };
+// #endif
+
+} // end namespace
 
 #endif
+
