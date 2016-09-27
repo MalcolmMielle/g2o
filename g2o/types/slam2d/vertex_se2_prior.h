@@ -51,17 +51,17 @@ namespace g2o {
   };
 
 #ifdef G2O_HAVE_OPENGL
-//   class G2O_TYPES_SLAM2D_API VertexSE2PriorDrawAction: public DrawAction{
-//   public:
-//     VertexSE2PriorDrawAction();
-//     virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
-//             HyperGraphElementAction::Parameters* params_ );
-//   protected:
-//     HyperGraphElementAction* _drawActions;
-//     virtual bool refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_);
-//     FloatProperty* _triangleX, *_triangleY;
-// 
-//   };
+  class G2O_TYPES_SLAM2D_API VertexSE2PriorDrawAction: public DrawAction{
+  public:
+    VertexSE2PriorDrawAction();
+    virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
+            HyperGraphElementAction::Parameters* params_ );
+  protected:
+    HyperGraphElementAction* _drawActions;
+    virtual bool refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_);
+    FloatProperty* _triangleX, *_triangleY;
+
+  };
 #endif
 
 } // end namespace
