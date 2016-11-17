@@ -40,8 +40,13 @@ namespace g2o {
   class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolm : public EdgeSE2
   {
     public:
+	  g2o::SE2 _original_value;
 //       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
       EdgeSE2Prior_malcolm();
+	  
+	  g2o::SE2 getOriginalValue(){return _original_value;}
+	  void setOriginalValue(const g2o::SE2& orig_val){_original_value = orig_val;}
+	  
 
   };
 
