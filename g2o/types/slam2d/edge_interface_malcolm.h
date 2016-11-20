@@ -24,46 +24,37 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef G2O_EDGE_SE2_PRIOR_H
-#define G2O_EDGE_SE2_PRIOR_H
+#ifndef G2O_EDGE_MALCOLM_INETRFACE_H
+#define G2O_EDGE_MALCOLM_INETRFACE_H
 
 #include "vertex_se2.h"
 #include "edge_se2.h"
 #include "g2o/core/base_unary_edge.h"
 #include "g2o_types_slam2d_api.h"
-#include "edge_interface_malcolm.h"
 
 namespace g2o {
 
   /**
-   * \brief Prior for a two D pose
+   * \brief Custom interface for easily changing all my nodes
    */
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolm : public EdgeSE2, public EdgeInterfaceMalcolm
+  class G2O_TYPES_SLAM2D_API EdgeInterfaceMalcolm
   {
     public:
-// 	  g2o::SE2 _original_value;
+	  g2o::SE2 _malcolm_original_value;
+	  double _malcolm_age;
+	  
 //       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
-      EdgeSE2Prior_malcolm();
+      EdgeInterfaceMalcolm(){};
 	  
-// 	  g2o::SE2 getOriginalValue(){return _original_value;}
-// 	  void setOriginalValue(const g2o::SE2& orig_val){_original_value = orig_val;}
+	  g2o::SE2 getOriginalValue(){return _malcolm_original_value;}
+	  void setOriginalValue(const g2o::SE2& orig_val){_malcolm_original_value = orig_val;}
+	  double getAge(){return _malcolm_age;}
+	  void setAge(double a){_malcolm_age = a;}
 	  
 
   };
 
-  
-  #ifdef G2O_HAVE_OPENGL
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolmDrawAction: public DrawAction{
-  public:
-    EdgeSE2Prior_malcolmDrawAction();
-    virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
-            HyperGraphElementAction::Parameters* params_);
-  protected:
-    virtual bool refreshPropertyPtrs(HyperGraphElementAction::Parameters* params_);
-    FloatProperty* _triangleX, *_triangleY;
 
-  };
-	#endif
 
 } // end namespace
 

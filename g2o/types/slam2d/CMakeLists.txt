@@ -1,6 +1,6 @@
 ADD_LIBRARY(types_slam2d ${G2O_LIB_TYPE}
   se2.h
-  edge_se2_pointxy_bearing.h  edge_se2_prior.h edge_landmark_se2.h vertex_se2_prior.h edge_se2_link.h edge_link_xy.h
+  edge_se2_pointxy_bearing.h  edge_se2_prior.h edge_landmark_se2.h vertex_se2_prior.h edge_se2_link.h edge_link_xy.h  edge_interface_malcolm.h edge_landmark_malcolm.h edge_landmark_malcolm.cpp edge_odometry_malcolm.h edge_odometry_malcolm.cpp
   edge_se2.cpp                  edge_se2_pointxy_calib.cpp  types_slam2d.cpp
   edge_se2.h                    edge_se2_pointxy_calib.h    vertex_point_xy.cpp
   edge_se2_pointxy.cpp        vertex_point_xy.h

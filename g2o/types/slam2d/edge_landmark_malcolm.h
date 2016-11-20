@@ -24,26 +24,27 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef G2O_EDGE_SE2_PRIOR_H
-#define G2O_EDGE_SE2_PRIOR_H
+#ifndef G2O_EDGE_LANDMARK_MALCOLM_H
+#define G2O_EDGE_LANDMARK_MALCOLM_H
 
 #include "vertex_se2.h"
 #include "edge_se2.h"
 #include "g2o/core/base_unary_edge.h"
 #include "g2o_types_slam2d_api.h"
 #include "edge_interface_malcolm.h"
+#include "edge_se2_pointxy.h"
 
 namespace g2o {
 
   /**
    * \brief Prior for a two D pose
    */
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolm : public EdgeSE2, public EdgeInterfaceMalcolm
+  class G2O_TYPES_SLAM2D_API EdgeLandmark_malcolm : public EdgeSE2PointXY, public EdgeInterfaceMalcolm
   {
     public:
 // 	  g2o::SE2 _original_value;
 //       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
-      EdgeSE2Prior_malcolm();
+      EdgeLandmark_malcolm();
 	  
 // 	  g2o::SE2 getOriginalValue(){return _original_value;}
 // 	  void setOriginalValue(const g2o::SE2& orig_val){_original_value = orig_val;}
@@ -53,9 +54,9 @@ namespace g2o {
 
   
   #ifdef G2O_HAVE_OPENGL
-  class G2O_TYPES_SLAM2D_API EdgeSE2Prior_malcolmDrawAction: public DrawAction{
+  class G2O_TYPES_SLAM2D_API EdgeLandmark_malcolmDrawAction: public DrawAction{
   public:
-    EdgeSE2Prior_malcolmDrawAction();
+    EdgeLandmark_malcolmDrawAction();
     virtual HyperGraphElementAction* operator()(HyperGraph::HyperGraphElement* element, 
             HyperGraphElementAction::Parameters* params_);
   protected:

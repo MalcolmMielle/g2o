@@ -31,13 +31,14 @@
 #include "edge_se2_pointxy.h"
 #include "g2o/core/base_unary_edge.h"
 #include "g2o_types_slam2d_api.h"
+#include "edge_interface_malcolm.h"
 
 namespace g2o {
 
   /**
    * \brief Prior for a two D pose
    */
-  class G2O_TYPES_SLAM2D_API EdgeLinkXY_malcolm : public EdgeSE2PointXY
+  class G2O_TYPES_SLAM2D_API EdgeLinkXY_malcolm : public EdgeSE2PointXY, public EdgeInterfaceMalcolm
   {
     public:
 //       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
