@@ -34,7 +34,7 @@
 
 namespace g2o {
 	EdgeLandmark_malcolm::EdgeLandmark_malcolm() :
-		EdgeSE2PointXY(), EdgeInterfaceMalcolm()
+		EdgeSE2PointXY()
 	{
 	}
   

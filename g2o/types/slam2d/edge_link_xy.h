@@ -38,9 +38,10 @@ namespace g2o {
   /**
    * \brief Prior for a two D pose
    */
-  class G2O_TYPES_SLAM2D_API EdgeLinkXY_malcolm : public EdgeSE2PointXY, public EdgeInterfaceMalcolm
+  class G2O_TYPES_SLAM2D_API EdgeLinkXY_malcolm : public EdgeSE2PointXY
   {
     public:
+		EdgeInterfaceMalcolm interface;
 //       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
       EdgeLinkXY_malcolm();
 

@@ -33,7 +33,7 @@
 
 namespace g2o {
 
-EdgeOdometry_malcolm::EdgeOdometry_malcolm() : EdgeSE2(), EdgeInterfaceMalcolm()
+EdgeOdometry_malcolm::EdgeOdometry_malcolm() : EdgeSE2()
 {
 
 }

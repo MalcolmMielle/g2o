@@ -46,10 +46,10 @@ namespace g2o {
 //       EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
       EdgeInterfaceMalcolm(){};
 	  
-	  g2o::SE2 getOriginalValue(){return _malcolm_original_value;}
-	  void setOriginalValue(const g2o::SE2& orig_val){_malcolm_original_value = orig_val;}
-	  double getAge(){return _malcolm_age;}
-	  void setAge(double a){_malcolm_age = a;}
+	  virtual g2o::SE2 getOriginalValue(){return _malcolm_original_value;}
+	  virtual void setOriginalValue(const g2o::SE2& orig_val){_malcolm_original_value = orig_val;}
+	  virtual double getAge(){return _malcolm_age;}
+	  virtual void setAge(double a){_malcolm_age = a;}
 	  
 
   };
